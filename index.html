@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Converter</title>
+
+<style>
+  body {
+        background-image: url('https://i.pinimg.com/originals/cd/8e/82/cd8e82fcb59e4e274ce6e296a5caac5e.gif'); 
+        background-size: cover; 
+        background-position: center; 
+    }
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-image: url('https://i.pinimg.com/originals/fc/3b/d1/fc3bd13b038d2a361bf4e3708350eb38.gif');
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #d43232;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #result {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+   
+
+button {
+  background-color: #e7eb0d; 
+  border: none;
+  color: white;
+  padding: 8px 16px; 
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px; 
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f50fbc; 
+}
+</style>
+</head>
+<body>
+
+<audio id="myAudio">
+  <source src="Sailor Moon - Japanese.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<button onclick="playMusic()">Play Music</button>
+<button onclick="stopMusic()">Stop Music</button>
+
+<script>
+var audio = document.getElementById("myAudio");
+
+function playMusic() {
+  audio.play();
+}
+
+function stopMusic() {
+  audio.pause();
+}
+</script>
+
+
+</head>
+<body>
+<div class="container">
+    <h1>Number Converter</h1>
+    <div>
+        <label for="number">Enter Number:</label>
+        <input type="text" id="number">
+    </div>
+    <div>
+        <label for="from">From:</label>
+        <select id="from">
+            <option value="binary">Binary</option>
+            <option value="decimal">Decimal</option>
+            <option value="octal">Octal</option>
+            <option value="hexadecimal">Hexadecimal</option>
+        </select>
+    </div>
+    <div>
+        <label for="to">To:</label>
+        <select id="to">
+            <option value="binary">Binary</option>
+            <option value="decimal">Decimal</option>
+            <option value="octal">Octal</option>
+            <option value="hexadecimal">Hexadecimal</option>
+        </select>
+    </div>
+    <div>
+        <button onclick="convert()">Convert</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<script>
+    function convert() {
+        var number = document.getElementById('number').value.trim();
+        var from = document.getElementById('from').value;
+        var to = document.getElementById('to').value;
+        var result = document.getElementById('result');
+        result.innerHTML = '';
+
+       
+        if (!number) {
+            result.innerHTML = 'Please enter a number.';
+            return;
+        }
+
+        
+        var decimal;
+        switch (from) {
+            case 'binary':
+                decimal = parseInt(number, 2);
+                break;
+            case 'hexadecimal':
+                decimal = parseInt(number, 16);
+                break;
+            case 'octal':
+                decimal = parseInt(number, 8);
+                break;
+            case 'decimal':
+            default:
+                decimal = parseInt(number, 10);
+                break;
+        }
+
+       
+        var convertedNumber;
+        switch (to) {
+            case 'binary':
+                convertedNumber = decimal.toString(2);
+                break;
+            case 'hexadecimal':
+                convertedNumber = decimal.toString(16).toUpperCase();
+                break;
+            case 'octal':
+                convertedNumber = decimal.toString(8);
+                break;
+            case 'decimal':
+            default:
+                convertedNumber = decimal.toString(10);
+                break;
+        }
+
+        
+        result.innerHTML = '<p>' + to.charAt(0).toUpperCase() + to.slice(1) + ': ' + convertedNumber + '</p>';
+    }
+</script>
+</body>
+</html>
